@@ -19,11 +19,6 @@ const Filter = {
   DISCUSSED: 'filter-discussed',
 }; // filter-thumbmails.js
 
-const SortFunc = {
-  RANDOM: () => 0.5 - Math.random(),
-  DISCUSSED: (a, b) => b.comments.length - a.comments.length,
-}; // filter-thumbmails.js
-
 const SliderValueDefault = {
   MIN: 0,
   MAX: 100,
@@ -47,6 +42,12 @@ const effectSettings = {
   heat: { min: 1, max: 3, step: 0.1, start: 3, filterType: 'brightness' }, // эффект "Зной"
 };// slider.js
 
+
+const sortType = {
+  sortRandom: () => 0.5 - Math.random(),
+  sortDiscussed: (a, b) => b.comments.length - a.comments.length,
+}; // filter-thumbmails.js
+
 export {
   TIMEOUT_DELAY_VALUE,
   BASE_URL,
@@ -57,7 +58,7 @@ export {
   MAX_LENGTH_DESCRIPTION,
   MAX_COUNT_PHOTO_RANDOM_FILTER,
   Filter,
-  SortFunc,
+  sortType,
   effectSettings,
   SliderValueDefault,
   HashtagValue,

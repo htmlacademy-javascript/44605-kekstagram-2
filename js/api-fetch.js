@@ -1,6 +1,7 @@
 import { BASE_URL, Route } from './const';
 import { showFilterObject } from './filter-thumbnails';
-import { showMessage } from './show-message-fetch';
+import { showMessage } from './show-messages';
+import { imgUploadButton } from './upload-form';
 
 let errorName = '';
 
@@ -31,6 +32,7 @@ const sendDataToServer = (body, onSuccess) => {
   )
     .then((response) => {
       if (response.ok) {
+        onSuccess();
         showMessage('success');
       } else if (!response.ok) {
         throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`);
@@ -39,8 +41,9 @@ const sendDataToServer = (body, onSuccess) => {
     .catch((error) => {
       errorName = error.name;
       showMessage('error', errorName);
-    })
-    .finally(() => onSuccess());
+      imgUploadButton.disabled = false;
+      imgUploadButton.textContent = 'Опубликовать';
+    });
 };
 
 export { sendDataToServer, getDataFromServer };
